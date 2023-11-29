@@ -24,8 +24,8 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
-    public Optional<Note> getNoteById(int id) {
-        return noteRepository.findById(id);
+    public Note getNoteById(int id) {
+        return noteRepository.findById(id).orElse(null);
     }
 
     public Note updateNote(int id, Note note) {
