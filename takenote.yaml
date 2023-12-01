@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: take-note
+spec:
+  selector:
+    app: take-note
+  ports:
+    - port: 8181
+      targetPort: 8181
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: take-note
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: take-note
+  template:
+    metadata:
+      labels:
+        app: take-note
+    spec:
+      containers:
+        - name: take-note
+          image: imranmihab/take-note:1.0.0
+          ports:
+            - containerPort: 8181
+          imagePullPolicy: Always
